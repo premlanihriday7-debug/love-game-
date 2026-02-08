@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day Heeta ❤️</title>
+
+<style>
+
+body{
+height:100vh;
+margin:0;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:linear-gradient(135deg,#ff4b5c,#ff758c);
+font-family:Arial;
+color:white;
+overflow:hidden;
+text-align:center;
+}
+
+h1{
+font-size:45px;
+}
+
+button{
+padding:15px 40px;
+font-size:22px;
+border:none;
+border-radius:40px;
+background:white;
+color:#ff4b5c;
+cursor:pointer;
+margin-top:30px;
+box-shadow:0 0 20px white;
+}
+
+.heart{
+position:absolute;
+font-size:22px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh);}
+100%{transform:translateY(110vh);}
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="music">
+<source src="music.mp3" type="audio/mp3">
+</audio>
+
+<h1>Happy Valentine's Day Heeta ❤️</h1>
+
+<button onclick="nextPage()">Open Your Surprise 💌</button>
+
+<script>
+
+let music=document.getElementById("music");
+
+document.body.onclick=function()
+{
+music.currentTime=58;
+music.play();
+};
+
+music.ontimeupdate=function()
+{
+if(music.currentTime>=78)
+music.currentTime=58;
+};
+
+function nextPage()
+{
+window.location.href="question.html";
+}
+
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.innerHTML="❤️";
+heart.className="heart";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),5000);
+
+},300);
+
+</script>
+
+</body>
+</html>

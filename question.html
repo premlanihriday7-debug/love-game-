@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Heeta ❤️</title>
+
+<style>
+
+body{
+height:100vh;
+margin:0;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+font-family:Arial;
+color:white;
+overflow:hidden;
+text-align:center;
+}
+
+h1{
+font-size:40px;
+}
+
+button{
+padding:15px 35px;
+font-size:20px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+margin:15px;
+}
+
+#yes{
+background:white;
+color:#ff4b5c;
+}
+
+#no{
+background:black;
+color:white;
+position:absolute;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<audio id="music">
+<source src="music.mp3" type="audio/mp3">
+</audio>
+
+<h1>Heeta, will you be my Valentine? ❤️</h1>
+
+<button id="yes" onclick="yesClick()">Yes ❤️</button>
+
+<button id="no" onmouseover="move()">No 💔</button>
+
+<script>
+
+let music=document.getElementById("music");
+
+document.body.onclick=function()
+{
+music.currentTime=58;
+music.play();
+};
+
+music.ontimeupdate=function()
+{
+if(music.currentTime>=78)
+music.currentTime=58;
+};
+
+function yesClick()
+{
+window.location.href="love.html";
+}
+
+function move()
+{
+let btn=document.getElementById("no");
+
+btn.style.left=Math.random()*window.innerWidth+"px";
+btn.style.top=Math.random()*window.innerHeight+"px";
+}
+
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.innerHTML="💖";
+heart.style.position="absolute";
+heart.style.left=Math.random()*100+"vw";
+heart.style.top="-10px";
+heart.style.fontSize="22px";
+heart.style.animation="fall 3s linear";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),3000);
+
+},300);
+
+</script>
+
+</body>
+</html>
