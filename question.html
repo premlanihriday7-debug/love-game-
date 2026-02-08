@@ -2,11 +2,9 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Heeta ❤️</title>
 
 <style>
-
 body{
 height:100vh;
 margin:0;
@@ -45,63 +43,66 @@ color:white;
 position:absolute;
 }
 
+.heart{
+position:absolute;
+font-size:20px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh);}
+100%{transform:translateY(110vh);}
+}
 </style>
 
 </head>
 
-<body>
+<body onclick="startMusic()">
 
-<audio id="music">
+<audio id="music" loop>
 <source src="music.mp3" type="audio/mp3">
 </audio>
 
 <h1>Heeta, will you be my Valentine? ❤️</h1>
 
 <button id="yes" onclick="yesClick()">Yes ❤️</button>
-
 <button id="no" onmouseover="move()">No 💔</button>
 
 <script>
 
 let music=document.getElementById("music");
 
-document.body.onclick=function()
-{
+function startMusic(){
 music.currentTime=58;
 music.play();
-};
+}
 
-music.ontimeupdate=function()
-{
-if(music.currentTime>=78)
+music.addEventListener("timeupdate",function(){
+if(music.currentTime>=78){
 music.currentTime=58;
-};
+}
+});
 
-function yesClick()
-{
+function yesClick(){
 window.location.href="love.html";
 }
 
-function move()
-{
+function move(){
 let btn=document.getElementById("no");
-
 btn.style.left=Math.random()*window.innerWidth+"px";
 btn.style.top=Math.random()*window.innerHeight+"px";
 }
 
+// floating hearts
 setInterval(()=>{
 let heart=document.createElement("div");
 heart.innerHTML="💖";
-heart.style.position="absolute";
+heart.className="heart";
 heart.style.left=Math.random()*100+"vw";
-heart.style.top="-10px";
-heart.style.fontSize="22px";
-heart.style.animation="fall 3s linear";
+heart.style.animationDuration=(Math.random()*3+2)+"s";
 document.body.appendChild(heart);
 
-setTimeout(()=>heart.remove(),3000);
-
+setTimeout(()=>heart.remove(),5000);
 },300);
 
 </script>
