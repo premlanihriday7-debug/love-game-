@@ -42,25 +42,13 @@ background:black;
 color:white;
 position:absolute;
 }
-
-.heart{
-position:absolute;
-font-size:20px;
-animation:fall linear infinite;
-}
-
-@keyframes fall{
-0%{transform:translateY(-10vh);}
-100%{transform:translateY(110vh);}
-}
 </style>
-
 </head>
 
-<body onclick="startMusic()">
+<body>
 
 <audio id="music" loop>
-<source src="music.mp3" type="audio/mp3">
+<source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <h1>Heeta, will you be my Valentine? ❤️</h1>
@@ -70,17 +58,22 @@ animation:fall linear infinite;
 
 <script>
 
-let music=document.getElementById("music");
+let music = document.getElementById("music");
 
-function startMusic(){
-music.currentTime=58;
+let savedTime = localStorage.getItem("musicTime");
+
+if(savedTime){
+music.currentTime = savedTime;
+}else{
+music.currentTime = 58;
+}
+
+document.addEventListener("click", function(){
 music.play();
-}
+}, { once: true });
 
-music.addEventListener("timeupdate",function(){
-if(music.currentTime>=78){
-music.currentTime=58;
-}
+music.addEventListener("timeupdate", function(){
+localStorage.setItem("musicTime", music.currentTime);
 });
 
 function yesClick(){
@@ -92,18 +85,6 @@ let btn=document.getElementById("no");
 btn.style.left=Math.random()*window.innerWidth+"px";
 btn.style.top=Math.random()*window.innerHeight+"px";
 }
-
-// floating hearts
-setInterval(()=>{
-let heart=document.createElement("div");
-heart.innerHTML="💖";
-heart.className="heart";
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(Math.random()*3+2)+"s";
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),5000);
-},300);
 
 </script>
 
